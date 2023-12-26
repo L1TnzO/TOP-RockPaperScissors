@@ -6,24 +6,42 @@ function getComputerChoice (){
 
 
 function playRound (playerChoice, computerChoice) {
-    if (playerChoice.toLowerCase() === computerChoice){
-        return 'draw'
-    }
-    if (playerChoice.toLowerCase() === 'rock' && computerChoice === 'scissors' ||
-    playerChoice.toLowerCase() === 'scissors' && computerChoice === 'paper' ||
-    playerChoice.toLowerCase() === 'paper' && computerChoice === 'rock'){
-        return 'player'
-    }
-    else{
-        return 'computer'
+    switch (playerChoice.toLowerCase() +'-'+ computerChoice) {
+        case 'rock-scissors':
+        case 'scissors-paper':
+        case 'paper-rock':
+            return 'player';
+        case 'rock-paper':
+        case 'scissors-rock':
+        case 'paper-scissors':
+            return 'computer';
+        default:
+            return 'draw';
     }
 };
 
 const playerChoice = "rock";
-const computerChoice = getComputerChoice();
 
 function game () {
-    
+    let playerCounter = 0;
+    let computerCounter = 0;
+    let drawCounter = 0;
+    let result;
+    for (let i = 0; i<5; i++){
+        result = playRound (playerChoice, getComputerChoice());
+        if (result == 'player'){
+            playerCounter += 1;
+        }
+        else if (result == 'computer'){
+            computerCounter += 1;
+        }
+        else{
+            drawCounter += 1;
+        }
+    }
+    if (playerCounter < computerCounter){return 'computer wins'}
+    else if (playerCounter > computerCounter){return 'player wins'}
+    else {return 'is draw'}
 };
 
-console.log(playRound(playerChoice,computerChoice));
+console.log(game());
