@@ -6,14 +6,24 @@ function getComputerChoice (){
 
 
 function playRound (playerChoice, computerChoice) {
-
+    if (playerChoice.toLowerCase() === computerChoice){
+        return 'draw'
+    }
+    if (playerChoice.toLowerCase() === 'rock' && computerChoice === 'scissors' ||
+    playerChoice.toLowerCase() === 'scissors' && computerChoice === 'paper' ||
+    playerChoice.toLowerCase() === 'paper' && computerChoice === 'rock'){
+        return 'player'
+    }
+    else{
+        return 'computer'
+    }
 };
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
+const playerChoice = "rock";
+const computerChoice = getComputerChoice();
 
 function game () {
     
 };
 
-console.log(getComputerChoice());
+console.log(playRound(playerChoice,computerChoice));
