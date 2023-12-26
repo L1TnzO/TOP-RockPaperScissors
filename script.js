@@ -23,25 +23,28 @@ function playRound (playerChoice, computerChoice) {
         
     }
 };
-
 let playerCounter = 0;
 let computerCounter = 0;
 let drawCounter = 0;
 function game (result) {
-    globalThis.playerCounter;
-    globalThis.computerCounter;
-    globalThis.drawCounter;
-    if(playerCounter === 5 || computerCounter === 5 || drawCounter === 5){console.log('el juego termino')}
+    switch (true) {
+        case playerCounter === 5:
+            return 'player wins';
+        case computerCounter === 5:
+            return 'computer wins';
+        case drawCounter === 5:
+            return 'draw';
+        default:}
+
     if (result == 'player'){
-        playerCounter +=1;
+        playerCounter++;
     }
     else if (result == 'computer'){
-        computerCounter +=1;
+        computerCounter++;
     }
     else{
-        drawCounter +=1;
+        drawCounter ++;
     }
-    
     if (playerCounter < computerCounter){return 'computer wins'}
     else if (playerCounter > computerCounter){return 'player wins'}
     else {return 'is draw'}
@@ -59,9 +62,8 @@ const bodyContainer = document.querySelector('.body-container');
 btnContainer.addEventListener('click', (e)=>{
     let target = e.target;
     if (target.tagName == 'BUTTON'){
-        result = playRound (target.getAttribute('data-action'), getComputerChoice ());
+        result = playRound(target.getAttribute('data-action'), getComputerChoice ());
         game(result);
         console.log(playerCounter)
-        
     }
 })
