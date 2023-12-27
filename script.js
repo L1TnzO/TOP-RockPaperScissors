@@ -6,48 +6,40 @@ function getComputerChoice (){
 
 
 function playRound (playerChoice, computerChoice) {
+    choiceVisualization.textContent = playerChoice+' v/s '+ computerChoice;
     switch (playerChoice.toLowerCase() +'-'+ computerChoice) {
         case 'rock-scissors':
         case 'scissors-paper':
         case 'paper-rock':
-            console.log('player');
+            roundInfo.textContent = 'Player wins round!';
             return 'player';
         case 'rock-paper':
         case 'scissors-rock':
         case 'paper-scissors':
-            console.log('computer');
+            roundInfo.textContent = 'Computer wins round!';
             return 'computer';
         default:
-            console.log('draw');
+            roundInfo.textContent = 'Draw round!';
             return 'draw';
         
     }
 };
+
 let playerCounter = 0;
 let computerCounter = 0;
-let drawCounter = 0;
-function game (result) {
-    switch (true) {
-        case playerCounter === 5:
-            return 'player wins';
-        case computerCounter === 5:
-            return 'computer wins';
-        case drawCounter === 5:
-            return 'draw';
-        default:}
 
+function game (result) {
     if (result == 'player'){
         playerCounter++;
     }
-    else if (result == 'computer'){
+    else{
         computerCounter++;
     }
-    else{
-        drawCounter ++;
-    }
-    if (playerCounter < computerCounter){return 'computer wins'}
-    else if (playerCounter > computerCounter){return 'player wins'}
-    else {return 'is draw'}
+    scoreInfo.textContent = 'Player: '+playerCounter+' | Computer: '+computerCounter;
+    if (playerCounter == 5){
+        roundInfo.textContent = 'Game ended! Player wins'};
+    if (computerCounter == 5){
+        roundInfo.textContent = 'Game ended! Computer wins'};
 };
 
 //references buttons
@@ -59,11 +51,21 @@ const scissorsBtn = document.querySelector('[data-action="scissors"]');
 const btnContainer = document.querySelector('.button-container')
 const bodyContainer = document.querySelector('.body-container');
 
+//create nodes
+
+const choiceVisualization = document.createElement('h3');
+const roundInfo = document.createElement('h3');
+const scoreInfo = document.createElement('h4');
+
+//append nodes
+bodyContainer.append(choiceVisualization,roundInfo,scoreInfo)
+
 btnContainer.addEventListener('click', (e)=>{
     let target = e.target;
+    if (playerCounter==5 || computerCounter==5){return;}
     if (target.tagName == 'BUTTON'){
         result = playRound(target.getAttribute('data-action'), getComputerChoice ());
         game(result);
-        console.log(playerCounter)
     }
 })
+
