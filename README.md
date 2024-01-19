@@ -1,2 +1,2 @@
 # TOP-RockPaperScissors
-The odin project DOM exercise
+Problem Solving Project for The Odin Project
